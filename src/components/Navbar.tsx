@@ -4,27 +4,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   HoverCard,
-  HoverCardArrow,
   HoverCardContent,
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -37,48 +23,65 @@ export default function Navbar() {
           alt={"Acsci logo"}
         />
         <Image src="/acsci-name.png" width={350} height={350} alt={"Acsci"} />
-        <Button variant="ghost">
-          <Link className="text-2xl font-menu" href="/">
-            HOME
-          </Link>
-        </Button>
-        <HoverCard>
-          <HoverCardTrigger asChild>
-            <Button className="text-2xl font-menu" variant="ghost">
-              ABOUT
-            </Button>
-          </HoverCardTrigger>
-          <HoverCardContent>
-            <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
-              <ul className="font-menu w-full">
-                <ListItem href={"/about/history"}>HISTORY</ListItem>
-                <ListItem href={"/about/mission"}>MISSION/VISION</ListItem>
-              </ul>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-        <HoverCard>
-          <HoverCardTrigger asChild>
-            <Button className="text-2xl font-menu" variant="ghost">
-              ACADEMIC
-            </Button>
-          </HoverCardTrigger>
-          <HoverCardContent>
-            <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
-              <ul className="font-menu w-full">
-                <ListItem href={"/academic/teachers"}>
-                  TEACHERS AND STAFF
-                </ListItem>
-                <ListItem href={"/academic/clubs"}>CLUBS</ListItem>
-              </ul>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-        <Button variant="ghost">
-          <Link className="text-2xl font-menu" href="/contact">
-            CONTACT
-          </Link>
-        </Button>
+        <div className="hidden lg:flex ml-auto">
+          <Button variant="ghost">
+            <Link className="text-2xl font-menu" href="/">
+              HOME
+            </Link>
+          </Button>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button className="text-2xl font-menu" variant="ghost">
+                ABOUT <ChevronDown />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+                <ul className="font-menu w-full">
+                  <ListItem href={"/about/history"}>HISTORY</ListItem>
+                  <ListItem href={"/about/mission"}>MISSION/VISION</ListItem>
+                </ul>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button className="text-2xl font-menu" variant="ghost">
+                ACADEMIC <ChevronDown />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+                <ul className="font-menu w-full">
+                  <ListItem href={"/academic/teachers"}>
+                    TEACHERS AND STAFF
+                  </ListItem>
+                  <ListItem href={"/academic/clubs"}>CLUBS</ListItem>
+                </ul>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button className="text-2xl font-menu" variant="ghost">
+                RESEARCH <ChevronDown />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+                <ul className="font-menu w-full">
+                  <ListItem href={"/research/winnings"}>WINNINGS</ListItem>
+                  <ListItem href={"/research/format"}>FORMAT</ListItem>
+                </ul>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+          <Button variant="ghost">
+            <Link className="text-2xl font-menu" href="/contact">
+              CONTACT
+            </Link>
+          </Button>
+        </div>
       </nav>
     </>
   );
@@ -87,10 +90,10 @@ export default function Navbar() {
 const ListItem = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div">
->(({ className, href, children, ...props }, ref) => {
+>(({ className, href, children, ...props }, ref): React.JSX.Element => {
   return (
     <li>
-      <Link href={href}>
+      <Link href={String(href)}>
         <div
           ref={ref}
           className={cn(
