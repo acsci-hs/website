@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Livvic as FontSans } from "next/font/google";
+import { Livvic as FontSans, Oswald } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -9,6 +9,12 @@ const fontSans = FontSans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-sans",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-display",
 });
 
 const openSansCondensed = localFont({
@@ -38,6 +44,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
           openSansCondensed.variable,
+          oswald.variable,
         )}
       >
         {children}

@@ -7,7 +7,7 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@radix-ui/react-hover-card";
+} from "@/components/ui/hover-card";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
@@ -17,12 +17,11 @@ export default function Navbar() {
     <>
       <nav className="flex items-center my-4 mx-7">
         <Image
-          src="/acsci-logo.png"
-          width={150}
-          height={150}
+          src="/acsci-logo-full.png"
+          width={500}
+          height={100}
           alt={"Acsci logo"}
         />
-        <Image src="/acsci-name.png" width={350} height={350} alt={"Acsci"} />
         <div className="hidden lg:flex ml-auto">
           <Button variant="ghost">
             <Link className="text-2xl font-menu" href="/">
@@ -36,7 +35,7 @@ export default function Navbar() {
               </Button>
             </HoverCardTrigger>
             <HoverCardContent>
-              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+              <div className="flex-col justify-items-center">
                 <ul className="font-menu w-full">
                   <ListItem href={"/about/history"}>HISTORY</ListItem>
                   <ListItem href={"/about/mission"}>MISSION/VISION</ListItem>
@@ -51,7 +50,7 @@ export default function Navbar() {
               </Button>
             </HoverCardTrigger>
             <HoverCardContent>
-              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+              <div className="flex-col justify-items-center">
                 <ul className="font-menu w-full">
                   <ListItem href={"/academic/teachers"}>
                     TEACHERS AND STAFF
@@ -68,7 +67,7 @@ export default function Navbar() {
               </Button>
             </HoverCardTrigger>
             <HoverCardContent>
-              <div className="flex-col py-3 border border-slate-300 shadow-xl justify-items-center mt-1 rounded-md">
+              <div className="flex-col justify-items-center">
                 <ul className="font-menu w-full">
                   <ListItem href={"/research/winnings"}>WINNINGS</ListItem>
                   <ListItem href={"/research/format"}>FORMAT</ListItem>
