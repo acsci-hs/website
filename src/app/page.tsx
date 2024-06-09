@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import {
@@ -6,8 +8,41 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+function HeroSection() {
+  return (
+    <div className="w-full">
+      <Carousel plugins={[Autoplay({ delay: 3000 })]}>
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index} className="pt-1 max-h-[80vh]">
+              <div>
+                <Image
+                  className="max-h-svh"
+                  src={`/hero/${index + 1}.jpg`}
+                  alt={`${index + 1}`}
+                  height={4000}
+                  width={6000}
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
+  );
+}
 
 function Programs() {
   return (
@@ -15,7 +50,7 @@ function Programs() {
       <div className="font-display text-5xl font-bold uppercase flex justify-center py-5">
         Programs
       </div>
-      <div className="flex flex-col space-y-20 justify-center sm:flex-row sm:space-x-5 md:space-x-10 lg:space-x-20 sm:space-y-0">
+      <div className="flex flex-col space-y-20 justify-center md:flex-row md:space-x-5 md:space-x-10 lg:space-x-20 md:space-y-0">
         <Card className="w-[25rem] shadow-lg">
           <Image
             className="object-cover rounded-t-lg"
@@ -77,6 +112,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <HeroSection />
       <Programs />
     </>
   );

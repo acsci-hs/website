@@ -15,7 +15,7 @@ import { ChevronDown } from "lucide-react";
 export default function Navbar() {
   return (
     <>
-      <nav className="flex items-center my-4 mx-7">
+      <nav className="flex items-center min-h-[20vh] mx-7">
         <Image
           src="/acsci-logo-full.png"
           width={500}
