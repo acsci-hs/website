@@ -11,18 +11,37 @@ import {
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [fix, setFix] = useState(false);
+  function setFixed() {
+    if (window.scrollY >= 60) {
+      setFix(true);
+    } else {
+      setFix(false);
+    }
+  }
+  window.addEventListener("scroll", setFixed);
+
   return (
     <>
-      <nav className="flex items-center min-h-[20vh] mx-7">
-        <Image
-          src="/acsci-logo-full.png"
-          width={500}
-          height={100}
-          alt={"Acsci logo"}
-        />
-        <div className="hidden lg:flex ml-auto">
+      <nav
+        className={`min-w-full px-7 flex items-center sticky top-0 z-50 bg-white ${fix ? "h-[10vh]" : "h-[20vh]"}`}
+      >
+        <div
+          className={`${fix ? "max-w-[45vw] md:max-w-[35vw] lg:max-w-[25vw] xl:max-w-[20vw]" : ""}`}
+        >
+          <Image
+            src="/acsci-logo-full.png"
+            className="max-w-full"
+            layout="intrinsic"
+            width={500}
+            height={100}
+            alt={"Acsci logo"}
+          />
+        </div>
+        <div className="hidden lg:flex ml-auto shrink">
           <Button variant="ghost">
             <Link className="text-2xl font-menu" href="/">
               HOME
