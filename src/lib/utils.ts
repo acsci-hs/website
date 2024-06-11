@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import React from "react";
-import type { IconType } from "@icons-pack/react-simple-icons";
+import { IconType } from "@icons-pack/react-simple-icons";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -8,34 +8,54 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 export default function Navbar() {
-  const [fix, setFix] = useState(false);
-  function setFixed() {
-    if (window.scrollY >= 60) {
-      setFix(true);
-    } else {
-      setFix(false);
-    }
-  }
-  window.addEventListener("scroll", setFixed);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    const handleScroll = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      timeoutId = setTimeout(() => {
+        const scrollPosition = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const scrollHeight = document.body.scrollHeight;
+        const scrollPercentage =
+          (scrollPosition / (scrollHeight - windowHeight)) * 100;
+
+        setScrolled(scrollPercentage > 5);
+      }, 100); // Debounce delay in milliseconds
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   return (
     <>
       <nav
-        className={`min-w-full px-7 flex items-center sticky top-0 z-50 bg-white ${fix ? "h-[10vh]" : "h-[20vh]"}`}
+        className={`min-w-full px-7 flex items-center sticky top-0 z-50 bg-white duration-100 ${scrolled ? "h-[10vh]" : "h-[20vh]"}`}
       >
         <div
-          className={`${fix ? "max-w-[45vw] md:max-w-[35vw] lg:max-w-[25vw] xl:max-w-[20vw]" : ""}`}
+          className={`${scrolled ? "max-w-[45vw] md:max-w-[35vw] lg:max-w-[25vw] xl:max-w-[20vw]" : ""}`}
         >
           <Image
             src="/acsci-logo-full.png"
             className="max-w-full"
-            layout="intrinsic"
             width={500}
             height={100}
             alt={"Acsci logo"}
