@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/legacy/image";
 import Navbar from "@/components/Navbar";
 import {
@@ -8,53 +6,18 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import ApplyBtn from "@/components/homepage/ApplyBtn";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Links, FooterInfo, FooterSocials } from "@/lib/utils";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { SiFacebook } from "@icons-pack/react-simple-icons";
+  BrowseLinks,
+  ContactInfo,
+  Socials,
+} from "@/components/homepage/FooterLinks";
+import HeroSectionCarousel from "@/components/homepage/HeroSectionCarousel";
 
 function HeroSection() {
   return (
     <div className="w-full relative">
-      <Carousel
-        className="relative z-[1]"
-        plugins={[Autoplay({ delay: 3000 })]}
-      >
-        <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="max-h-[80vh]">
-              <div>
-                <Image
-                  className="max-h-svh object-cover"
-                  src={`/hero/${index + 1}.jpg`}
-                  alt={`${index + 1}`}
-                  height={1080}
-                  width={1920}
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="absolute z-[3] inset-0 p-3 pl-16 pt-24">
-          <div className="text-7xl text-white font-menu text-shadow-lg uppercase">
-            Home of the Champions
-          </div>
-          <div className="text-4xl text-white font-menu leading-snug text-shadow-lg max-w-3xl">
-            Angeles City Science High School envisions in molding students who
-            are globally competitive in the field of Science and Technology
-            imbued with the necessary skills, values and attitudes to respond to
-            the needs of changing society.
-          </div>
-        </div>
-        <div className="absolute inset-0 z-[2] size-full bg-slate-800 opacity-60 mix-blend-multiply"></div>
-      </Carousel>
+      <HeroSectionCarousel />
     </div>
   );
 }
@@ -83,13 +46,7 @@ function Programs() {
               students with a well-rounded education with additional elective
               classes for science.
             </CardDescription>
-            <Button
-              variant="ghost"
-              className="bg-accent text-accent-foreground uppercase font-menu font-semibold text-2xl"
-              size="xl"
-            >
-              <Link href="/application/jhs">Apply Now!</Link>
-            </Button>
+            <ApplyBtn href="/application/jhs" />
           </CardContent>
         </Card>
         <Card className="w-[25rem] shadow-lg">
@@ -109,13 +66,7 @@ function Programs() {
               integrates rigorous academic coursework with hands-on learning
               experiences.
             </CardDescription>
-            <Button
-              variant="ghost"
-              className="bg-accent text-accent-foreground uppercase font-menu font-semibold text-2xl"
-              size="xl"
-            >
-              <Link href="/application/shs">Apply Now!</Link>
-            </Button>
+            <ApplyBtn href="/application/shs" />
           </CardContent>
         </Card>
       </div>
@@ -124,63 +75,6 @@ function Programs() {
 }
 
 function Footer() {
-  const footerLinks: Links[] = [
-    {
-      url: "application/jhs",
-      display: "Application (JHS)",
-    },
-    {
-      url: "application/shs",
-      display: "Application (SHS)",
-    },
-    {
-      url: "announcements",
-      display: "Announcements",
-    },
-    {
-      url: "events",
-      display: "Events",
-    },
-    {
-      url: "research",
-      display: "Research",
-    },
-  ];
-
-  const footerInfo: FooterInfo[] = [
-    {
-      icon: MapPin,
-      description: "Doña Aurora Street, Lourdes Sur East, Angeles City",
-    },
-    {
-      icon: Phone,
-      description: "JHS: (0968) 520 7777",
-    },
-    {
-      icon: Phone,
-      description: "SHS: (0968) 520 7777",
-    },
-    {
-      icon: Mail,
-      description: "acscience.seniorhs@depedangelescity.com",
-    },
-    {
-      icon: Mail,
-      description: "acscience.hs@depedangelescity.com",
-    },
-  ];
-
-  const footerSocials: FooterSocials[] = [
-    {
-      icon: SiFacebook,
-      url: "https://www.facebook.com/ACSciHS307202",
-    },
-    {
-      icon: SiFacebook,
-      url: "https://www.facebook.com/profile.php?id=61558627855847",
-    },
-  ];
-
   return (
     <div className="relative min-h-[60svh] min-w-full text-white">
       <Image
@@ -214,16 +108,7 @@ function Footer() {
             Browse
           </div>
           <div className="mt-2">
-            <ul>
-              {footerLinks.map((link, index) => (
-                <li
-                  key={index}
-                  className="uppercase hover:text-accent duration-150 font-medium text-lg"
-                >
-                  <Link href={link.url}>{link.display}</Link>
-                </li>
-              ))}
-            </ul>
+            <BrowseLinks />
           </div>
         </div>
         <div className="row-span-2 place-content-center lg:pt-[6vh]">
@@ -231,16 +116,7 @@ function Footer() {
             Contact Us
           </div>
           <div className="mt-2">
-            <ul>
-              {footerInfo.map((info, index) => (
-                <li
-                  key={index}
-                  className="flex gap-x-2 my-2 font-medium text-lg"
-                >
-                  <info.icon /> <p>{info.description}</p>
-                </li>
-              ))}
-            </ul>
+            <ContactInfo />
           </div>
         </div>
         <div className="place-content-center place-self-center lg:place-self-start lg:pt-[6vh] lg:pl-[5vw]">
@@ -248,15 +124,7 @@ function Footer() {
             Social
           </div>
           <div>
-            <ul className="flex gap-x-2 mt-2">
-              {footerSocials.map((social, index) => (
-                <li key={index}>
-                  <Link href={social.url}>
-                    <social.icon className="size-8 hover:text-accent duration-150" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <Socials />
           </div>
         </div>
         <div className="row-start-3 self-end pl-[5vw] ">
