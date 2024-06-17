@@ -12,13 +12,6 @@ const config = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -82,7 +75,27 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities({
+        clamp(value) {
+          // load font sizes from theme
+          const sizes = theme("fontSize");
+
+          // parse the value passed in from class name
+          // split it by "-" and compare pieces to fontSize values
+          const split = value
+            .split("-")
+            .map((v) => (sizes[v] ? sizes[v]["0"] : v));
+
+          // return a clamped font-size
+          return {
+            fontSize: `clamp(${split[0]}, ${split[1]}, ${split[2]})`,
+          };
+        },
+      });
+    }),
+  ],
 } satisfies Config;
 
 export default config;

@@ -67,9 +67,9 @@
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+    /* * { */
+    /*     @apply border-border; */
+    /* } */
     body {
         @apply bg-background text-foreground;
     }
@@ -96,5 +96,9 @@
     .bold-accent {
         font-weight: bold;
         color: #9e002f;
+    }
+
+    .hero-background {
+        background-image: url("/hero.png");
     }
 }

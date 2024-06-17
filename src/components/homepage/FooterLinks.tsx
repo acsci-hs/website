@@ -34,7 +34,7 @@ export function BrowseLinks() {
       {footerLinks.map((link, index) => (
         <li
           key={index}
-          className="uppercase hover:text-accent duration-150 font-medium text-lg"
+          className="uppercase hover:text-accent duration-150 font-medium text-[clamp(1rem,2vw+0.125rem,1.125rem)]"
         >
           <Link href={link.url}>{link.display}</Link>
         </li>
@@ -69,8 +69,14 @@ export function ContactInfo() {
   return (
     <ul>
       {footerInfo.map((info, index) => (
-        <li key={index} className="flex gap-x-2 my-2 font-medium text-lg">
-          <info.icon /> <p>{info.description}</p>
+        <li
+          key={index}
+          className="flex gap-x-2 my-2 text-[clamp(1rem,2vw+0.125rem,1.125rem)]"
+        >
+          <info.icon className="shrink-0" />{" "}
+          <p className="text-[clamp(0.875rem,0.95rem,1rem)]">
+            {info.description}
+          </p>
         </li>
       ))}
     </ul>

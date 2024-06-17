@@ -30,7 +30,7 @@ export default function Navbar() {
         const scrollPercentage =
           (scrollPosition / (scrollHeight - windowHeight)) * 100;
 
-        setScrolled(scrollPercentage > 5);
+        setScrolled(scrollPercentage > 0);
       }, 100); // Debounce delay in milliseconds
     };
 
